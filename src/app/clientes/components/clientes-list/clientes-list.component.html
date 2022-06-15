@@ -1,0 +1,171 @@
+<div class="container-xl">
+          
+    <!-- Page title Header -->
+    <div class="page-header d-print-none">
+      <div class="row align-items-center">
+        
+        <!-- Page title -->
+        <div class="col">
+          <!-- Page pre-title 
+          <div class="page-pretitle">
+            Overview
+          </div> -->
+          <h2 class="page-title">
+            Gestionar Clientes
+          </h2>
+        </div>
+
+        <!-- Page title actions -->
+        <div class="col-auto ms-auto d-print-none">
+          <div class="btn-list">
+
+            <button class="btn btn-light" data-bs-toggle="collapse" data-bs-target="#filterCollapse" aria-expanded="true">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-filter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M5.5 5h13a1 1 0 0 1 .5 1.5l-5 5.5l0 7l-4 -3l0 -4l-5 -5.5a1 1 0 0 1 .5 -1.5"></path>
+              </svg> Filtrar
+            </button>
+
+            <button routerLink="/newCliente" class="btn btn-primary">
+              <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg>
+              Nuevo Cliente
+            </button>
+            
+          </div>
+        </div>  <!-- ./Page title actions -->
+
+      </div>
+    </div>
+</div>
+
+<!-- Contenido Página -->
+<div class="page-body">
+    <div class="container-xl">
+      <div class="row row-cards">
+        
+        <!-- Filtros -->
+        <form id="clientesFilterList" [formGroup]="filterForm">
+        <div class="col-12">
+          <div id="filterCollapse" class="accordion-collapse collapse" >
+            <div class="card">
+              
+              <div class="card-header">
+                <h3 class="card-title">Filtros disponibles</h3>
+
+                <div class="card-actions">
+                  <button class="btn btn-yellow" (click)="clientesFilter()">
+                    <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-filter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                      <path d="M5.5 5h13a1 1 0 0 1 .5 1.5l-5 5.5l0 7l-4 -3l0 -4l-5 -5.5a1 1 0 0 1 .5 -1.5"></path>
+                   </svg> 
+                    &nbsp;Filtrar                         
+                  </button>
+                </div>
+              </div>
+            
+              <div class=" card-body">
+                <div class="row ">
+                  <!-- Filtro DNI -->
+                  <div class="col-md-6 col-xl-3">
+                    <div class="mb-3">
+                      <label class="form-label">DNI/NIF/CIF</label>
+                      <input type="text" class="form-control" name="filterDNI" [formControl]="dni" placeholder="Introduzca DNI">
+                    </div>  <!-- ./col-mb-3 -->
+                  </div>  <!-- ./col-md-6 -->
+
+                  <!-- Filtro Nombre -->
+                  <div class="col-md-6 col-xl-3">
+                    <div class="mb-3">
+                      <label class="form-label">Nombre</label>
+                      <input type="text" class="form-control" name="filterNombre" [formControl]="nombre" placeholder="Introduzca Nombre">
+                    </div>  <!-- ./col-mb-3 -->
+                  </div>  <!-- ./col-md-6 -->
+                </div>  <!-- ./row -->
+              </div>  <!-- ./card-body -->
+            </div>  <!-- ./card -->  
+          </div>  <!-- ./collapse -->
+        </div>  <!-- ./col-12 -->
+        </form>
+
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Listado de Clientes</h3>
+            </div>
+            
+            <div class="table-responsive">
+              <table class="table card-table table-vcenter text-nowrap datatable">
+                <thead>
+                  <tr>
+                    <th>Idioma</th>
+                    <th>Nombre</th>
+                    <th>DNI/NIF/CIF</th>
+                    <th>Dirección</th>
+                    <th>Teléfono</th>
+                    <th></th>
+                  </tr>
+                </thead>
+
+                <tbody>
+
+                  <tr *ngIf="numClientes == 0">
+                    <td colspan="6" class="text-center">No existen clientes.</td>
+                  </tr>
+
+                  <tr *ngFor="let cliente of clientes$ | async">
+                    <td><span class="flag flag-country-es"></span></td>
+                    <td>{{cliente.nombre}} {{cliente.apellidos}}</td>
+                    <td>{{cliente.dni}}</td>
+                    <td>{{cliente.direccion}}</td>
+                    <td>{{cliente.telefono1}}</td>
+                    <td class="text-end">
+                      <a routerLink="/clientes/{{cliente.id}}"  class="btn btn-light w-10 btn-icon">
+                        <!-- Download SVG icon from http://tabler-icons.io/i/brand-tabler -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-eye" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                          <circle cx="12" cy="12" r="2"></circle>
+                          <path d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s7.333 2.333 10 7"></path>
+                        </svg>                           
+                      </a>
+                    </td>
+                  </tr>
+
+                  
+
+                  
+
+                </tbody>
+              </table>
+            </div>  <!-- ./Table-responsive -->
+
+            <!-- Card Footer -->
+            <div class="card-footer d-flex align-items-center">
+              <p class="m-0 text-muted"><!--<span>1</span> a <span>8</span> de--> <span>{{numClientes}}</span> resultados</p>
+              <!--<ul class="pagination m-0 ms-auto">
+                <li class="page-item disabled">
+                  <a class="page-link" href="#" tabindex="-1" aria-disabled="true">-->
+                    <!-- Download SVG icon from http://tabler-icons.io/i/chevron-left -->
+                    <!--<svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline points="15 6 9 12 15 18" /></svg>
+                  </a>
+                </li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>-->
+
+                <!-- <li class="page-item">
+                  <a class="page-link" href="#">-->
+                    <!-- Download SVG icon from http://tabler-icons.io/i/chevron-right -->
+                    <!-- <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline points="9 6 15 12 9 18" /></svg>
+                  </a>
+                </li>
+              </ul>-->
+            </div>  <!-- ./card-footer -->
+          </div>  <!-- ./card -->
+        </div>  <!-- ./col-12 -->
+
+      </div>  <!-- ./row-cards -->
+    </div>  <!-- ./container-xl -->
+
+  </div>  <!-- ./page-body Contenido Página -->

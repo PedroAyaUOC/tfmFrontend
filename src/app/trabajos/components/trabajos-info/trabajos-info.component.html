@@ -1,0 +1,327 @@
+<!-- Cabecera sección página -->
+<div class="container-xl">
+          
+    <!-- Page title Header -->
+    <div class="page-header d-print-none">
+      <div class="row align-items-center">
+        
+        <!-- Page title -->
+        <div class="col">
+          <!-- Page pre-title 
+          <div class="page-pretitle">
+            Overview
+          </div> -->
+          <h2 class="page-title">
+            Información Trabajo
+          </h2>
+        </div>
+
+        <!-- Page title actions -->
+        <div class="col-auto ms-auto d-print-none">
+          <div class="btn-list">
+        
+            <!--<a href="#" class="btn btn-light" data-bs-toggle="collapse" data-bs-target="#collapse-1" aria-expanded="true">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-back-up" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M9 13l-4 -4l4 -4m-4 4h11a4 4 0 0 1 0 8h-1"></path>
+              </svg> 
+              <span class="d-none d-sm-inline">Volver</span>
+            </a>-->
+
+            <button type="submit" form="updateTrabajoForm"  class="btn btn-primary" [disabled]="trabajoForm.invalid" (click)="saveTrabajo()">              
+              <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-device-floppy" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M6 4h10l4 4v10a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2"></path>
+                <circle cx="12" cy="14" r="2"></circle>
+                <polyline points="14 4 14 8 8 8 8 4"></polyline>
+              </svg>                    
+              Guardar
+            </button>
+           
+          </div>
+        </div>  <!-- ./Page title actions -->
+
+      </div>
+    </div>
+  </div>  <!-- ./Cabecera sección página -->
+
+  <!-- Contenido Página -->
+  <div class="page-body">
+    <form id="updateTrabajoForm" [formGroup]="trabajoForm">
+    <div class="container-xl">
+      <div class="row row-cards">
+        
+        <!-- Datos Trabajo -->
+        <div class="col-md-6">
+        
+            <div class="card">
+            
+              <div class="card-header">
+                <h3 class="card-title">Datos Trabajo</h3>
+              </div>
+            
+              <div class=" card-body">
+                <div class="row ">
+
+                  <!-- inputs hidden -->
+                  <input type="text" name="formFEntrada" [formControl]="fEntrada"  [hidden]="true">
+                  <input type="text" name="formExpediente" [formControl]="expediente" [hidden]="true">
+
+                  <!-- Cliente -->
+                  <div class="col-12">
+                    <div class="mb-3">
+                      <div class="form-label">Cliente</div>
+                      <select name="formIdcliente" [formControl]="idCliente" class="form-select">
+                        <option 
+                          *ngFor="let cliente of (clientesList$ | async)"
+                          [ngValue]="cliente.id"
+                        >
+                          {{cliente.nombre}} {{cliente.apellidos}} 
+                        </option>
+                      </select>
+                    </div>  <!-- ./mb-3 -->
+                  </div>  <!-- ./col -->
+
+                  <!-- Tipo -->
+                  <div class="col-12">
+                    <div class="mb-3">
+                      <div class="form-label">Tipo Trabajo</div>
+                      <select name="formTipo" [formControl]="idTipo" class="form-select">
+                        <option 
+                          *ngFor="let tipoTrabajo of (tiposTrabajoList$ | async)"
+                          [ngValue]="tipoTrabajo.id"
+                        >
+                          {{tipoTrabajo.titulo}}
+                      </option>
+                      </select>
+                    </div>  <!-- ./mb-3 -->
+                  </div>  <!-- ./col -->
+
+                  <!-- Descripción -->
+                  <div class="col-12">
+                    <div class="mb-3">
+                      <label class="form-label">Descripción</label>
+                      <textarea name="formDescripcion" [formControl]="descripcion" class="form-control" rows="5" placeholder="Descripción sobre el trabajo"></textarea>
+                    </div>  <!-- ./mb-3 -->
+                  </div>  <!-- ./col -->
+
+                  <!-- Observaciones -->
+                  <div class="col-12">
+                    <div class="mb-3">
+                      <label class="form-label">Observaciones</label>
+                      <textarea name="formObservaciones" [formControl]="observaciones" class="form-control" rows="7" placeholder="Observaciones a tener en cuenta"></textarea>
+                    </div>  <!-- ./mb-3 -->
+                  </div>  <!-- ./col -->
+
+                  
+                </div>  <!-- ./row -->
+              </div>  <!-- ./card-body -->
+            </div>  <!-- ./card -->  
+
+        </div>  <!-- ./col -->
+        
+        <!-- Dirección Trabajo -->
+        <div class="col-md-6">
+          
+          <div class="card">
+            
+            <div class="card-header">
+              <h3 class="card-title">Ubicación Trabajo</h3>
+            </div>  <!-- ./card-header -->
+
+            <div class=" card-body">
+              <div class="row">
+
+                <!-- Dirección -->
+                <div class="col-12">
+                  <div class="mb-3">
+                    <label class="form-label">Dirección</label>
+                    <input type="text" name="formDireccion" [formControl]="direccion" class="form-control"  placeholder="Introduzca dirección">
+                  </div>  <!-- ./mb-3 -->
+                </div>  <!-- ./col -->
+
+                <!-- Provincia -->
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <div class="form-label">Provincia</div>
+                    <select name="formProvincia" class="form-select" (change)="filtrarMunicipios()" [formControl]="idProvincia">
+                      <option 
+                        *ngFor="let provincia of (provincias$ | async)"
+                        [ngValue]="provincia.id"
+                      >
+                        {{provincia.nombre}}
+                      </option>
+                    </select>
+                  </div>  <!-- ./mb-3 -->
+                </div>  <!-- ./col -->
+
+                <!-- Municipio -->
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <div class="form-label">Ciudad</div>
+                    <select name="formMunicipio" [formControl]="idMunicipio" class="form-select">
+                      <option 
+                        *ngFor="let municipio of (municipios$ | async) "
+                        [ngValue]="municipio.id"
+                      >
+                        {{municipio.nombre}}
+                      </option>
+                    </select>
+                  </div>  <!-- ./mb-3 -->
+                </div>  <!-- ./col -->
+
+                <!-- MAPA -->
+                <div class="col-12 my-2">
+                  <div class="mb-3">
+                    <div id="mapInfoTrabajo"></div>
+                    <!--<div id="mapTrabajo" class="w-100 h-100"></div>-->
+                    <input type="text" name="formCoordenadaX" [formControl]="coordenadaX"  [hidden]="true" >
+                    <input type="text" name="formCoordenadaY" [formControl]="coordenadaY"  [hidden]="true" >
+                  </div>  <!-- ./mb-3 -->
+                </div>  <!-- ./col -->
+
+                <!-- Catastro -->
+                <div class="col-12">
+                  <div class="mb-3">
+                    <label class="form-label">Ref. Catastral</label>
+                    <div class="input-group mb-2">
+                      <input type="text" [formControl]="refCatastro" class="form-control" placeholder="Número de referencia">
+                      <button class="btn" type="button" (click)="showCatastro()">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-external-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                          <path d="M11 7h-5a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-5"></path>
+                          <line x1="10" y1="14" x2="20" y2="4"></line>
+                          <polyline points="15 4 20 4 20 9"></polyline>
+                        </svg>
+                      </button>
+                    </div>
+                    
+                  </div>  <!-- ./mb-3 -->
+                </div>  <!-- ./col -->
+
+              </div>  <!-- ./row -->
+            </div>  <!-- ./card-body -->
+          </div>  <!-- ./card -->
+        </div>  <!-- ./col -->
+
+        <!-- Documentos Tarea -->
+        <div class="col-sm-6">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Archivos Asociados</h3>
+              <div class="card-actions">
+                <a href="#" class="btn btn-yellow" data-bs-toggle="modal" data-bs-target="#modalAddDocumento">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg> 
+                  Añadir                         
+                </a>
+              </div>
+            </div>
+            
+            <div class="table-responsive">
+              <table class="table card-table table-vcenter datatable">
+                <thead>
+                  <tr>
+                    <th>Fecha</th>
+                    <th>Nombre</th>
+                    <th></th>
+                  </tr>
+                </thead>
+
+                <tbody>
+
+                  <tr *ngIf="numArchivos == 0">
+                    <td colspan="3" class="text-center">No existen archivos asociados.</td>
+                  </tr>
+
+                  <tr *ngFor="let archivo of archivos$ | async">
+
+                    <td>{{archivo.fCreacion | date: 'dd-MM-yyyy'}}</td>
+                    <td>{{archivo.titulo}}</td>
+                    <td class="text-end">
+
+                      <a href="#" class="btn btn-light w-10 btn-icon me-2" data-bs-toggle="modal" data-bs-target="#modalDelDocumento" (click)="setFormDeleteArchivo(archivo.id)">
+                        <!-- Download SVG icon from http://tabler-icons.io/i/brand-tabler -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                          <line x1="4" y1="7" x2="20" y2="7"></line>
+                          <line x1="10" y1="11" x2="10" y2="17"></line>
+                          <line x1="14" y1="11" x2="14" y2="17"></line>
+                          <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
+                          <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
+                        </svg>                            
+                      </a>
+
+                      <a href="{{archivo.slug}}" target="_blank" class="btn btn-light w-10 btn-icon">
+                        <!-- Download SVG icon from http://tabler-icons.io/i/brand-tabler -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-download" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                          <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2"></path>
+                          <polyline points="7 11 12 16 17 11"></polyline>
+                          <line x1="12" y1="4" x2="12" y2="16"></line>
+                        </svg>                              
+                      </a>
+
+                    </td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>  <!-- ./Table-responsive -->
+          </div>  <!-- ./card -->
+        </div>  <!-- ./col -->  <!-- Documentos tarea -->
+
+      
+      </div>  <!-- ./row-cards -->
+    </div>  <!-- ./container-xl -->
+  </form>
+
+
+  <!-- Modal Add Documento -->
+  <div class="modal modal-blur fade" id="modalAddDocumento" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+      <form id="newArchivoForm" [formGroup]="newArchivoForm" (ngSubmit)="saveArchivo()">
+        <div class="modal-header">
+          <h5 class="modal-title">Añadir Archivo Asociado</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          
+          <div class="mb-3">
+            <label class="form-label">Nombre Archivo</label>
+            <input type="text" name="formAddArchivo" [formControl]="titulo" class="form-control" placeholder="Nombre del archivo">
+          </div>  <!-- ./mb-3 -->
+
+          <div class="mb-3">
+            <div class="form-label">Seleccionar Archivo</div>
+            <input type="file" class="form-control" [formControl]="fichero" (change)="uploadFile($event)">
+          </div>  <!-- ./mb-3 -->
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn me-auto" data-bs-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" [disabled]="newArchivoForm.invalid">Guardar</button>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Del Documento -->
+  <div class="modal modal-blur fade" id="modalDelDocumento" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="modal-title">Confirmar Eliminación</div>
+          <div>Se va a borrar el documento. ¿Está seguro?</div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn me-auto" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="deleteArchivo()">Si, deseo borrarlo</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  </div>  <!-- ./page-body Contenido Página -->

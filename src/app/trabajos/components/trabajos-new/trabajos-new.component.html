@@ -1,0 +1,219 @@
+<!-- Cabecera sección página -->
+<div class="container-xl">
+          
+    <!-- Page title Header -->
+    <div class="page-header d-print-none">
+      <div class="row align-items-center">
+        
+        <!-- Page title -->
+        <div class="col">
+          <!-- Page pre-title 
+          <div class="page-pretitle">
+            Overview
+          </div> -->
+          <h2 class="page-title">
+            Nuevo Trabajo
+          </h2>
+        </div>
+
+        <!-- Page title actions -->
+        <div class="col-auto ms-auto d-print-none">
+          <div class="btn-list">
+            
+            <!-- <span class="d-none d-sm-inline">
+              <a href="#" class="btn btn-light" data-bs-toggle="collapse" data-bs-target="#collapse-1" aria-expanded="true">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-back-up" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M9 13l-4 -4l4 -4m-4 4h11a4 4 0 0 1 0 8h-1"></path>
+                </svg> 
+                Volver
+              </a>
+            </span> -->
+
+            <button type="submit" form="newTrabajoForm" [disabled]="trabajoForm.invalid" class="btn btn-primary" (click)="saveTrabajo()">
+              <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-device-floppy" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M6 4h10l4 4v10a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2"></path>
+                <circle cx="12" cy="14" r="2"></circle>
+                <polyline points="14 4 14 8 8 8 8 4"></polyline>
+              </svg>                    
+              Guardar
+            </button>
+            
+          </div>
+        </div>  <!-- ./Page title actions -->
+
+      </div>
+    </div>
+  </div>  <!-- ./Cabecera sección página -->
+
+  <!-- Contenido Página -->
+  <div class="page-body">
+    <form id="newTrabajoForm" [formGroup]="trabajoForm"></form>
+
+    <div class="container-xl">
+      <div class="row row-cards">
+        
+        <!-- Datos Cliente -->
+        <div class="col-md-6">
+        
+            <div class="card">
+            
+              <div class="card-header">
+                <h3 class="card-title">Datos Trabajo</h3>
+              </div>
+            
+              <div class=" card-body">
+                <div class="row ">
+
+                  <!-- inputs hidden -->
+                  <input type="text" name="formFEntrada" [formControl]="fEntrada"  [hidden]="true">
+                  <input type="text" name="formExpediente" [formControl]="expediente" [hidden]="true">
+
+                  <!-- Cliente -->
+                  <div class="col-12">
+                    <div class="mb-3">
+                      <div class="form-label">Cliente</div>
+                      <select name="formIdcliente" [formControl]="idCliente" class="form-select">
+                        <option 
+                          *ngFor="let cliente of (clientesList$ | async)"
+                          [ngValue]="cliente.id"
+                        >
+                          {{cliente.nombre}} {{cliente.apellidos}} 
+                        </option>
+                      </select>
+                    </div>  <!-- ./mb-3 -->
+                  </div>  <!-- ./col -->
+
+                  <!-- Tipo -->
+                  <div class="col-12">
+                    <div class="mb-3">
+                      <div class="form-label">Tipo Trabajo</div>
+                      <select name="formTipo" [formControl]="idTipo" class="form-select">
+                        <option 
+                          *ngFor="let tipoTrabajo of (tiposTrabajoList$ | async)"
+                          [ngValue]="tipoTrabajo.id"
+                        >
+                          {{tipoTrabajo.titulo}}
+                        </option>
+                      </select>
+                    </div>  <!-- ./mb-3 -->
+                  </div>  <!-- ./col -->
+
+                  <!-- Descripción -->
+                  <div class="col-12">
+                    <div class="mb-3">
+                      <label class="form-label">Descripción</label>
+                      <textarea name="descripcion" [formControl]="descripcion" class="form-control" rows="5" placeholder="Descripción sobre el trabajo"></textarea>
+                      <!--<div *ngIf="descripcion.errors && isValidForm != null && !isValidForm" [ngClass]="'invalid-feedback'">
+                        <div *ngIf="descripcion.errors.required">Campo requerido</div>
+                        <div *ngIf="descripcion.errors.maxlength">Máximo 100 caracteres</div>
+                      </div>-->
+                    </div>  <!-- ./mb-3 -->
+                  </div>  <!-- ./col -->
+
+                  <!-- Observaciones -->
+                  <div class="col-12">
+                    <div class="mb-3">
+                      <label class="form-label">Observaciones</label>
+                      <textarea class="form-control" name="formObservaciones" [formControl]="observaciones" rows="7" placeholder="Observaciones a tener en cuenta"></textarea>
+                    </div>  <!-- ./mb-3 -->
+                  </div>  <!-- ./col -->
+
+                  
+                </div>  <!-- ./row -->
+              </div>  <!-- ./card-body -->
+            </div>  <!-- ./card -->  
+
+        </div>  <!-- ./col -->
+        
+        <!-- Dirección Cliente -->
+        <div class="col-md-6">
+          
+          <div class="card">
+            
+            <div class="card-header">
+              <h3 class="card-title">Ubicación Trabajo</h3>
+            </div>  <!-- ./card-header -->
+
+            <div class=" card-body">
+              <div class="row">
+
+                <!-- Dirección -->
+                <div class="col-12">
+                  <div class="mb-3">
+                    <label class="form-label">Dirección</label>
+                    <input type="text" name="formDireccion" [formControl]="direccion" class="form-control"  placeholder="Introduzca dirección">
+                  </div>  <!-- ./mb-3 -->
+                </div>  <!-- ./col -->
+
+                <!-- Provincia -->
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <div class="form-label">Provincia</div>
+                    <select name="formIdProvincia" class="form-select" [formControl]="idProvincia" (change)="filtrarMunicipios()">
+                      <option 
+                        *ngFor="let provincia of (provincias$ | async)"
+                        [ngValue]="provincia.id"
+                      >
+                        {{provincia.nombre}}
+                      </option>
+                    </select>
+                  </div>  <!-- ./mb-3 -->
+                </div>  <!-- ./col -->
+
+                <!-- Municipio -->
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <div class="form-label">Ciudad</div>
+                    <select name="formCiudad" [formControl]="idMunicipio" class="form-select">
+                      <option 
+                        *ngFor="let municipio of (municipios$ | async) "
+                        [ngValue]="municipio.id"
+                        [selected]="municipio.id == trabajo.idMunicipio"
+                      >
+                        {{municipio.nombre}}
+                      </option>
+                    </select>
+                  </div>  <!-- ./mb-3 -->
+                </div>  <!-- ./col -->
+
+                <!-- MAPA -->
+                <div class="col-12 my-2">
+                  <div class="mb-3">
+                    <div id="mapNewTrabajo"></div>
+                    <!--<div id="mapTrabajo" class="w-100 h-100"></div>-->
+                    <input type="text" name="formCoordenadaX" [formControl]="coordenadaX"  [hidden]="true" >
+                    <input type="text" name="formCoordenadaY" [formControl]="coordenadaY"  [hidden]="true" >
+                  </div>  <!-- ./mb-3 -->
+                </div>  <!-- ./col -->
+
+                <!-- Catastro -->
+                <div class="col-12">
+                  <div class="mb-3">
+                    <label class="form-label">Ref. Catastral</label>
+                    <div class="input-group mb-2">
+                      <input type="text" [formControl]="refCatastro" class="form-control" placeholder="Número de referencia">
+                      <button class="btn" type="button" (click)="showCatastro()">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-external-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                          <path d="M11 7h-5a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-5"></path>
+                          <line x1="10" y1="14" x2="20" y2="4"></line>
+                          <polyline points="15 4 20 4 20 9"></polyline>
+                        </svg>
+                      </button>
+                    </div>
+                    
+                  </div>  <!-- ./mb-3 -->
+                </div>  <!-- ./col -->
+
+              </div>  <!-- ./row -->
+            </div>  <!-- ./card-body -->
+          </div>  <!-- ./card -->
+        </div>  <!-- ./col -->
+
+      </div>  <!-- ./row-cards -->
+    </div>  <!-- ./container-xl -->
+
+  </div>  <!-- ./page-body Contenido Página -->

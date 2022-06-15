@@ -1,0 +1,222 @@
+<!-- Cabecera sección página -->
+<div class="container-xl">
+          
+    <!-- Page title Header -->
+    <div class="page-header d-print-none">
+      <div class="row align-items-center">
+        
+        <!-- Page title -->
+        <div class="col">
+          <!-- Page pre-title 
+          <div class="page-pretitle">
+            Overview
+          </div> -->
+          <h2 class="page-title">
+            Nuevo Cliente
+          </h2>
+        </div>
+
+        <!-- Page title actions -->
+        <div class="col-auto ms-auto d-print-none">
+          <div class="btn-list">
+            <!-- <span class="d-none d-sm-inline">
+              <a href="#" class="btn btn-light" data-bs-toggle="collapse" data-bs-target="#collapse-1" aria-expanded="true">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-back-up" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M9 13l-4 -4l4 -4m-4 4h11a4 4 0 0 1 0 8h-1"></path>
+                </svg> 
+                Volver
+              </a>
+            </span> -->
+  
+            <button type="submit" form="newClienteForm" [disabled]="clienteForm.invalid" class="btn btn-primary" (click)="saveCliente()">
+              <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-device-floppy" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M6 4h10l4 4v10a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2"></path>
+                <circle cx="12" cy="14" r="2"></circle>
+                <polyline points="14 4 14 8 8 8 8 4"></polyline>
+              </svg>                    
+              Guardar
+            </button>
+            
+          </div>
+        </div>  <!-- ./Page title actions -->
+
+      </div>
+    </div>
+  </div>  <!-- ./Cabecera sección página -->
+
+  <!-- Contenido Página -->
+  <div class="page-body">
+    <form id="newClienteForm" [formGroup]="clienteForm">
+    <div class="container-xl">
+      <div class="row row-cards">
+        
+        <!-- Datos Cliente -->
+        <div class="col-md-6">
+        
+            <div class="card">
+            
+              <div class="card-header">
+                <h3 class="card-title">Datos Personales</h3>
+              </div>
+            
+              <div class=" card-body">
+                <div class="row ">
+
+                  <!-- Nombre -->
+                  <div class="col-md-7 col-xl-8">
+                    <div class="mb-3">
+                      <label class="form-label">Nombre</label>
+                      <input type="text" class="form-control" [formControl]="nombre" placeholder="Introduzca Nombre">
+                    </div>  <!-- ./mb-3 -->
+                  </div>  <!-- ./col -->
+
+                  <!-- DNI -->
+                  <div class="col-md-5 col-xl-4">
+                    <div class="mb-3">
+                      <label class="form-label">DNI/NIF/CIF</label>
+                      <input type="text" class="form-control" [formControl]="dni" placeholder="Introduzca DNI">
+                    </div>  <!-- ./mb-3 -->
+                  </div>  <!-- ./col -->
+
+                  <!-- Apellidos -->
+                  <div class="col-md-7 col-xl-8">
+                    <div class="mb-3">
+                      <label class="form-label">Apellidos</label>
+                      <input type="text" type="text" class="form-control" [formControl]="apellidos" placeholder="Introduzca Apellidos">
+                    </div>  <!-- ./mb-3 -->
+                  </div>  <!-- ./col -->
+
+                  <!-- Idioma -->
+                  <div class="col-md-5 col-xl-4">
+                    <div class="mb-3">
+                      <div class="form-label">Idioma</div>
+                      <select [formControl]="idioma" class="form-select">
+                        <option value="es" selected>Español</option>
+                        <option value="en">Inglés</option>
+                        <option value="fr">Francés</option>
+                      </select>
+                    </div>  <!-- ./mb-3 -->
+                  </div>  <!-- ./col -->
+
+                  <!-- Email -->
+                  <div class="col-12">
+                    <div class="mb-3">
+                      <label class="form-label">Email</label>
+                      <input type="text" class="form-control" [formControl]="email" placeholder="Introduzca Email">
+                    </div>  <!-- ./mb-3 -->
+                  </div>  <!-- ./col -->
+
+                  <!-- Teléfono 1 -->
+                  <div class="col-md-6">
+                    <div class="mb-3">
+                      <label class="form-label">Teléfono 1</label>
+                      <input type="text" class="form-control" [formControl]="telefono1" placeholder="Introduzca Teléfono 1">
+                    </div>  <!-- ./mb-3 -->
+                  </div>  <!-- ./col -->
+
+                  <!-- Teléfono 2 -->
+                  <div class="col-md-6">
+                    <div class="mb-3">
+                      <label class="form-label">Teléfono 2</label>
+                      <input type="text" class="form-control" [formControl]="telefono2" placeholder="Introduzca Teléfono 2">
+                    </div>  <!-- ./mb-3 -->
+                  </div>  <!-- ./col -->
+
+                  
+                </div>  <!-- ./row -->
+              </div>  <!-- ./card-body -->
+            </div>  <!-- ./card -->  
+
+        </div>  <!-- ./col -->
+        
+        <!-- Dirección Cliente -->
+        <div class="col-md-6">
+          
+          <div class="card">
+            
+            <div class="card-header">
+              <h3 class="card-title">Dirección de Contacto</h3>
+            </div>  <!-- ./card-header -->
+
+            <div class=" card-body">
+              <div class="row">
+
+                <!-- Provincia -->
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <div class="form-label">Provincia</div>
+                    <select class="form-select" (change)="filtrarMunicipios()" [formControl]="idProvincia">
+                      <option 
+                        *ngFor="let provincia of (provincias$ | async)"
+                        [ngValue]="provincia.id"
+                        [selected]="provincia.id == 4"
+                      >
+                        {{provincia.nombre}}
+                      </option>
+                    </select>
+                  </div>  <!-- ./mb-3 -->
+                </div>  <!-- ./col -->
+
+                <!-- Ciudad -->
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <div class="form-label">Ciudad</div>
+                    <select [formControl]="idMunicipio " class="form-select">
+                      <option 
+                        *ngFor="let municipio of (municipios$ | async) "
+                        [ngValue]="municipio.id"
+                      >
+                        {{municipio.nombre}}
+                      </option>
+                    </select>
+                  </div>  <!-- ./mb-3 -->
+                </div>  <!-- ./col -->
+
+                <!-- Dirección -->
+                <div class="col-md-9 col-xl-9">
+                  <div class="mb-3">
+                    <label class="form-label">Dirección</label>
+                    <input type="text" class="form-control" [formControl]="direccion" placeholder="Introduzca Dirección">
+                  </div>  <!-- ./mb-3 -->
+                </div>  <!-- ./col -->
+
+                <!-- CP -->
+                <div class="col-md-3 col-xl-3">
+                  <div class="mb-3">
+                    <label class="form-label">CP</label>
+                    <input type="text" class="form-control" [formControl]="cp" placeholder="CP">
+                  </div>  <!-- ./mb-3 -->
+                </div>  <!-- ./col -->
+
+              </div>  <!-- ./row -->
+            </div>  <!-- ./card-body -->
+          </div>  <!-- ./card -->
+        </div>  <!-- ./col -->
+
+        <!-- Observaciones Cliente -->
+        <div class="col-md-6">         
+          <div class="card">
+            <div class=" card-body">
+              <div class="row">
+                <!-- Observaciones -->
+                <div class="col-12">
+                  <div class="mb-3">
+                    <label class="form-label">Observaciones</label>
+                    <textarea class="form-control" [formControl]="observaciones" rows="3" placeholder="Observaciones sobre el cliente.."></textarea>
+                  </div>  <!-- ./mb-3 -->
+                </div>  <!-- ./col -->
+              </div>  <!-- ./row -->
+            </div>  <!-- ./card-body -->
+          </div>  <!-- ./card -->
+        </div>  <!-- ./col -->
+
+
+      </div>  <!-- ./row-cards -->
+    </div>  <!-- ./container-xl -->
+
+    
+  </form>
+  </div>  <!-- ./page-body Contenido Página -->

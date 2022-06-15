@@ -1,0 +1,41 @@
+
+
+<!-- Contenido Página -->
+<div class="page-body">
+
+    <div class="page page-center">
+        <div class="container-tight py-4">
+            <!-- <div class="text-center mb-4">
+            <a href="." class="navbar-brand navbar-brand-autodark"><img src="./static/logo.svg" height="36" alt=""></a>
+            </div> -->
+            <form class="card card-md" [formGroup]="form" (submit)="submit()" autocomplete="off">
+            <div class="card-body">
+                <h2 class="card-title text-center mb-4">Autentícate para acceder a tu cuenta</h2>
+                <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input type="email" name="formEmail" formControlName="email" class="form-control" placeholder="Introduce email">
+                </div>
+                <div class="mb-2">
+                <label class="form-label">
+                    Password
+                    <!--<span class="form-label-description">
+                    <a href="./forgot-password.html">I forgot password</a>
+                    </span>-->
+                </label>
+                <div class="input-group input-group-flat">
+                    <input type="password" name="formPass" class="form-control" formControlName="password" placeholder="Introduce password"  autocomplete="off">
+                </div>
+                </div>
+                
+                <div class="form-footer">
+                <button type="submit" class="btn btn-primary w-100">Acceder</button>
+                </div>
+            </div>
+            
+            </form>
+            <div class="text-center text-muted mt-3">
+            ¿No tienes cuenta de usuario? <a href="mailto:email@email.com" tabindex="-1">Solicítala</a>
+            </div>
+        </div>
+    </div>
+</div>  <!-- ./page-body Contenido Página -->
